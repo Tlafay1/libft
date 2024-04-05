@@ -2,6 +2,8 @@ CC = gcc
 
 NAME = libft.a
 
+SHARED = libft.so
+
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c\
@@ -24,16 +26,16 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	@ar rcs $(NAME) $(OBJS)
-	gcc -shared -o libft.so -fPIC $(SRCS)
+	gcc -shared -o $(SHARED) -fPIC $(SRCS)
 
 %.o : %.c $(INCLUDES)
 	@$(CC) -c $< $(CFLAGS)
 
 clean :
-	@$(RM) $(OBJS)
+	@$(RM) $(OBJS) $(SHARED)
 
 fclean : clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(SHARED)
 
 re : fclean all
 
